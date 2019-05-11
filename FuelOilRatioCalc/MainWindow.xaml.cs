@@ -25,7 +25,7 @@ namespace FuelOilRatioCalc
             InitializeComponent();
         }
 
-        private void VolumeInput(object sender, KeyEventArgs e)
+        private void VolumeKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = !IsNumberKey(e.Key)&& !IsDelOrBackspaceOrTabKey(e.Key);
         }
@@ -47,7 +47,52 @@ namespace FuelOilRatioCalc
 
         private void RadioBtnMouseUp(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello", "This was expected");
+            if ((bool)ImperialRadio.IsChecked)
+            {
+                FuelVolLbl.Content = "Gallons";
+                CalculateVolume();
+            }
+            else if ((bool)MetricRadio.IsChecked)
+            {
+                FuelVolLbl.Content = "Liter";
+                CalculateVolume();
+
+            }
+            else
+            {
+                List<FuelOil> fuelOil = new List<FuelOil>();
+                fuelOil.Add(new FuelOil { Ratio = "err", Volume = "err" });
+                FuelOilList.ItemsSource = fuelOil;
+            }
+        }
+
+        private void VolumeKeyUp(object sender, KeyEventArgs e)
+        {
+            CalculateVolume();
+            if (FuelVolumeBox.Text == "")
+            {
+                FuelOilList.ItemsSource = null;
+            }
+        }
+
+        private void CalculateVolume()
+        {
+            try
+            {
+                decimal d = decimal.Parse(FuelVolumeBox.Text);
+                if ((bool)ImperialRadio.IsChecked)
+                {
+                    FuelOilList.ItemsSource = Calculate.CalculatRatio(false, d);
+                }
+                else
+                {
+                    FuelOilList.ItemsSource = Calculate.CalculatRatio(true, d);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
