@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="Fuel Oil Calculator" Height="450" Width="800">
     <Grid>
-        
+        <ListView Margin="10,105,10,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ratio" Width="100px" DisplayMemberBinding="{Binding Ratio}" />
+                    <GridViewColumn Header="Mix Oil Volume" Width="250px" DisplayMemberBinding="{Binding Volume}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Volume of Fuel" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="129,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="FuelVolumeBox" KeyDown="VolumeInput" />
+        <Label Content="Volume Type" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="Imperial" HorizontalAlignment="Left" Margin="129,61,0,0" VerticalAlignment="Top" Name="ImperialRadio" IsChecked="True" Click="RadioBtnMouseUp"/>
+        <RadioButton Content="Metric" HorizontalAlignment="Left" Margin="242,61,0,0" VerticalAlignment="Top" Name="MetricRadio" Click="RadioBtnMouseUp" />
+
     </Grid>
 </Window>

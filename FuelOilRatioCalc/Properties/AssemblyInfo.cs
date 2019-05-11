@@ -7,10 +7,10 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FuelOilRatioCalc")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Fuel/Oil Ratio Calculator")]
+[assembly: AssemblyDescription("Calculates fuel and oil ratio for mixing 2-stroke gas engines")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Lux Computer Solutions")]
 [assembly: AssemblyProduct("FuelOilRatioCalc")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
@@ -53,3 +53,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en")]
+

@@ -24,5 +24,30 @@ namespace FuelOilRatioCalc
         {
             InitializeComponent();
         }
+
+        private void VolumeInput(object sender, KeyEventArgs e)
+        {
+            e.Handled = !IsNumberKey(e.Key)&& !IsDelOrBackspaceOrTabKey(e.Key);
+        }
+        private bool IsNumberKey(Key inKey)
+        {
+            if (inKey < Key.D0 || inKey > Key.D9)
+            {
+                if (inKey < Key.NumPad0 || inKey > Key.NumPad9)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool IsDelOrBackspaceOrTabKey(Key key)
+        {
+            return key == Key.Delete || key == Key.Back || key == Key.Tab || key == Key.OemPeriod || key == Key.Decimal;
+        }
+
+        private void RadioBtnMouseUp(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello", "This was expected");
+        }
     }
 }
