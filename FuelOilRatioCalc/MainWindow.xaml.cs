@@ -50,19 +50,20 @@ namespace FuelOilRatioCalc
             if ((bool)ImperialRadio.IsChecked)
             {
                 FuelVolLbl.Content = "Gallons";
-                CalculateVolume();
+                if (CheckIfNull())
+                    CalculateVolume();
             }
             else if ((bool)MetricRadio.IsChecked)
             {
-                FuelVolLbl.Content = "Liter";
-                CalculateVolume();
-
+                FuelVolLbl.Content = "Liters";
+                if(CheckIfNull())
+                    CalculateVolume();
             }
             else
             {
-                List<FuelOil> fuelOil = new List<FuelOil>();
-                fuelOil.Add(new FuelOil { Ratio = "err", Volume = "err" });
-                FuelOilList.ItemsSource = fuelOil;
+                List<FuelOil> err = new List<FuelOil>();
+                err.Add(new FuelOil { Ratio = "err", Volume = "err" });
+                FuelOilList.ItemsSource = err;
             }
         }
 
@@ -79,20 +80,32 @@ namespace FuelOilRatioCalc
         {
             try
             {
-                decimal d = decimal.Parse(FuelVolumeBox.Text);
-                if ((bool)ImperialRadio.IsChecked)
+                decimal d;
+                if (!CheckIfNull())
+                    d = decimal.Parse(FuelVolumeBox.Text);
+                else
+                    d = 0;
+                if ((bool)ImperialRadio.IsChecked && d != 0)
                 {
                     FuelOilList.ItemsSource = Calculate.CalculatRatio(false, d);
                 }
-                else
+                else if ((bool)MetricRadio.IsChecked && d != 0)
                 {
                     FuelOilList.ItemsSource = Calculate.CalculatRatio(true, d);
                 }
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("Failed to parse the input number. Error code: " + ex.Message,"Error");
             }
+        }
+
+        private bool CheckIfNull()
+        {
+            if (FuelVolumeBox.Text == "" || FuelVolumeBox.Text == "0")
+                return true;
+            else
+                return false;
         }
     }
 }
