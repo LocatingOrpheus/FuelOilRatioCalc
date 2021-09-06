@@ -81,7 +81,7 @@ namespace FuelOilRatioCalc
             try
             {
                 decimal d;
-                if (!CheckIfNull())
+                if (CheckIfNull())
                     d = decimal.Parse(FuelVolumeBox.Text);
                 else
                     d = 0;
@@ -103,9 +103,9 @@ namespace FuelOilRatioCalc
         private bool CheckIfNull()
         {
             if (FuelVolumeBox.Text == "" || FuelVolumeBox.Text == "0")
-                return true;
-            else
                 return false;
+            else
+                return true;
         }
     }
 }
